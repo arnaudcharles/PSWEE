@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+    <Type>
+        <Name>System.IO.FileInfo</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>Age</Name>
+                <GetScriptBlock>
+                    ((Get-Date) - ($this.CreationTime)).Days
+                </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+</Types>

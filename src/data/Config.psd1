@@ -1,0 +1,3 @@
+﻿@{
+    RandomKey = 'RandomValue'
+}
