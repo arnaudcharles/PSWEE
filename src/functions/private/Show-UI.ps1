@@ -1,4 +1,7 @@
 function Show-UI {
+    [CmdletBinding()]
+    param()
+
     Clear-Host
 
     # Line fat 0

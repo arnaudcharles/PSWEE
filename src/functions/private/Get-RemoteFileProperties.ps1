@@ -1,4 +1,5 @@
 function Get-RemoteFileProperties {
+    [CmdletBinding()]
     param([string]$FilePath)
 
     try {

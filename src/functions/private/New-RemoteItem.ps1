@@ -1,4 +1,5 @@
 function New-RemoteItem {
+    [CmdletBinding()]
     param([string]$Path)
 
     Clear-Host
@@ -95,7 +96,7 @@ function New-RemoteItem {
 
             Invoke-Command -Session $script:session -ArgumentList $folderPath -ScriptBlock {
                 param($FolderPath)
-                New-Item -Path $FolderPath -ItemType Directory -Force | Out-Null
+                $null = New-Item -Path $FolderPath -ItemType Directory -Force
             }
 
             Write-Host "`n⨁ Item created successfully !" -ForegroundColor Green
@@ -122,7 +123,7 @@ function New-RemoteItem {
 
             Invoke-Command -Session $script:session -ArgumentList $filePath -ScriptBlock {
                 param($FilePath)
-                New-Item -Path $FilePath -ItemType File -Force | Out-Null
+                $null = New-Item -Path $FilePath -ItemType File -Force
             }
 
             Write-Host "`n⨁ Item created successfully !" -ForegroundColor Green

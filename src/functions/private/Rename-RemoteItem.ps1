@@ -1,4 +1,5 @@
 function Rename-RemoteItem {
+    [CmdletBinding()]
     param([string]$FilePath, [string]$CurrentName)
 
     Clear-Host

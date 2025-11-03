@@ -1,4 +1,5 @@
 function Show-FileProperties {
+    [CmdletBinding()]
     param([string]$FilePath)
 
     Clear-Host
@@ -53,5 +54,5 @@ function Show-FileProperties {
 
     Write-Host "`n$(("═" * $script:consoleWidth))" -ForegroundColor White
     Write-Host "  Press any key to return..." -ForegroundColor DarkGray
-    [System.Console]::ReadKey($true) | Out-Null
+    $null = [System.Console]::ReadKey($true)
 }

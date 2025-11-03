@@ -1,4 +1,5 @@
 function Invoke-PSBite-Editor {
+    [CmdletBinding()]
     param([string]$FilePath)
 
     Clear-Host
@@ -52,7 +53,8 @@ function Invoke-PSBite-Editor {
         # End of processing
         Write-Host "`n▶  Execution completed !" -ForegroundColor Green
         Write-Host "`n  Press any key to return to explorer..." -ForegroundColor DarkGray
-        [System.Console]::ReadKey($true) | Out-Null
+        $null = [System.Console]::ReadKey($true)
+
     }
     catch {
         Write-Host "✘ Execution failed: $_" -ForegroundColor Red

@@ -1,4 +1,5 @@
 function Move-Selection {
+    [CmdletBinding()]
     param([int]$Direction)
 
     $newIndex = $script:selectedIndex + $Direction

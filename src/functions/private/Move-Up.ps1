@@ -1,4 +1,7 @@
 function Move-Up {
+    [CmdletBinding()]
+    param()
+
     if ($script:currentPath -ne "\" -and $script:currentPath -notmatch '^[A-Z]:$') {
         $script:currentPath = Split-Path -Parent $script:currentPath
         if ([string]::IsNullOrEmpty($script:currentPath)) {

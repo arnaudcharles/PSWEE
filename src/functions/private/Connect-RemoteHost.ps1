@@ -1,4 +1,7 @@
 function Connect-RemoteHost {
+    [CmdletBinding()]
+    param()
+
     try {
         Write-Host "`n>> Connecting to $ComputerName..." -ForegroundColor Cyan
 

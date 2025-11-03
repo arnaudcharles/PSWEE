@@ -38,6 +38,7 @@
 #>
 
 function Start-PSWEE {
+    [CmdletBinding()]
     [Alias("wee", "weee", "weeee", "weeeee")]
     param(
         [Parameter(Mandatory = $true)]

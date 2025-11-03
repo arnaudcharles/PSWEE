@@ -1,4 +1,5 @@
 function Get-RemoteItems {
+    [CmdletBinding()]
     param([string]$Path)
 
     try {

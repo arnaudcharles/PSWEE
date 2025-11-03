@@ -1,4 +1,5 @@
 function Format-FileSize {
+    [CmdletBinding()]
     param([long]$Bytes)
 
     if ($Bytes -eq 0) { return "0 B" }

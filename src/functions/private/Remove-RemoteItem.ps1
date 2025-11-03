@@ -1,4 +1,5 @@
 function Remove-RemoteItem {
+    [CmdletBinding()]
     param([string]$FilePath, [string]$ItemName, [bool]$IsFolder)
 
     Clear-Host

@@ -1,4 +1,7 @@
 function Open-Item {
+    [CmdletBinding()]
+    param()
+
     if ($script:items.Count -eq 0) { return }
 
     $selectedItem = $script:items[$script:selectedIndex]
