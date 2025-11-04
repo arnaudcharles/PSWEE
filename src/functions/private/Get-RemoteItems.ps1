@@ -1,4 +1,17 @@
 function Get-RemoteItems {
+    <#
+    .SYNOPSIS
+        Retrieves a list of items (files and folders) from a remote path.
+    .DESCRIPTION
+        Connects to a remote computer via an existing WinRM session and retrieves a list of items
+        (files and folders) from the specified remote path.
+    .PARAMETER Path
+        The remote path to retrieve items from.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param([string]$Path)
 
@@ -12,27 +25,27 @@ function Get-RemoteItems {
 
             Get-ChildItem -Path $RemotePath -Force -ErrorAction SilentlyContinue |
             Select-Object -Property @{
-                Name = 'Name'
+                Name       = 'Name'
                 Expression = { $_.Name }
             },
             @{
-                Name = 'Type'
+                Name       = 'Type'
                 Expression = { if ($_.PSIsContainer) { 'Folder' } else { 'File' } }
             },
             @{
-                Name = 'Size'
+                Name       = 'Size'
                 Expression = { if ($_.PSIsContainer) { '-' } else { $_.Length } }
             },
             @{
-                Name = 'Modified'
+                Name       = 'Modified'
                 Expression = { $_.LastWriteTime.ToString('yyyy-MM-dd HH:mm') }
             },
             @{
-                Name = 'IsFolder'
+                Name       = 'IsFolder'
                 Expression = { $_.PSIsContainer }
             },
             @{
-                Name = 'FullPath'
+                Name       = 'FullPath'
                 Expression = { $_.FullName }
             }
         }

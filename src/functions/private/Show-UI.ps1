@@ -1,4 +1,15 @@
 function Show-UI {
+    <#
+    .SYNOPSIS
+        Displays the main interactive console UI for PSWEE.
+    .DESCRIPTION
+        Renders the main user interface for PSWEE, showing the current path,
+        list of items (files and folders), and navigation instructions.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param()
 

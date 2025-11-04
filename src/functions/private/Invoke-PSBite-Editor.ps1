@@ -1,4 +1,17 @@
 function Invoke-PSBite-Editor {
+    <#
+    .SYNOPSIS
+        Invokes the PSBite editor on a remote file.
+    .DESCRIPTION
+        Prompts the user for confirmation and then invokes the Start-PSBite function
+        to open the specified remote file in the PSBite editor.
+    .PARAMETER FilePath
+        The full path of the remote file to open in the PSBite editor.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param([string]$FilePath)
 

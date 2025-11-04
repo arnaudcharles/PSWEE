@@ -1,4 +1,23 @@
 function Connect-RemoteHost {
+    <#
+    .SYNOPSIS
+        Establishes a remote PowerShell session to the specified host.
+    .DESCRIPTION
+        This function attempts to create a remote PowerShell session (PSSession) to a specified
+        computer using provided credentials and connection options.
+    .PARAMETER ComputerName
+        The name or IP address of the remote computer to connect to.
+    .PARAMETER Credential
+        PowerShell credentials to use for the connection.
+    .PARAMETER SkipCertificateCheck
+        If specified, SSL/TLS certificate verification will be skipped.
+    .NOTES
+        Requires WinRM to be enabled on the remote computer.
+
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param()
 
@@ -7,9 +26,9 @@ function Connect-RemoteHost {
 
         $sessionParams = @{
             ComputerName = $ComputerName
-            Port = 5986
-            UseSSL = $true
-            ErrorAction = 'Stop'
+            Port         = 5986
+            UseSSL       = $true
+            ErrorAction  = 'Stop'
         }
 
         if ($Credential) {

@@ -1,4 +1,8 @@
 ﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+    'PSProvideCommentHelp', '',
+    Justification = 'Not necessary for Pester tests'
+)]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
     'PSReviewUnusedParameter', '',
     Justification = 'Required for Pester tests'
 )]

@@ -1,4 +1,17 @@
 function New-RemoteItem {
+    <#
+    .SYNOPSIS
+        Creates a new file or folder on the remote host.
+    .DESCRIPTION
+        Presents an interactive console UI to choose between creating a new folder or file
+        on the remote host via an existing WinRM session.
+    .PARAMETER Path
+        The remote path where the new item will be created.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param([string]$Path)
 

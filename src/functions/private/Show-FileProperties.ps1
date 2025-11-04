@@ -1,4 +1,18 @@
 function Show-FileProperties {
+    <#
+    .SYNOPSIS
+        Displays the properties of a remote file or folder.
+    .DESCRIPTION
+        Connects to a remote computer via an existing WinRM session and displays properties
+        such as name, type, size, creation date, modification date, and access date of the specified file or folder
+        in an interactive console UI.
+    .PARAMETER FilePath
+        The full path of the remote file or folder to show properties for.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param([string]$FilePath)
 

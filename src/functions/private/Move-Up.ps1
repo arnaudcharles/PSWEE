@@ -1,4 +1,14 @@
 function Move-Up {
+    <#
+    .SYNOPSIS
+        Moves up one directory level in the current path.
+    .DESCRIPTION
+        Changes the current path to its parent directory, unless already at the root level.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
     [CmdletBinding()]
     param()
 
