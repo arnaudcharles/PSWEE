@@ -4,6 +4,18 @@
 
 <p align="center"> <img src="./media/logo/PSWEE.png" alt="Logo" /> </p>
 
+<div align="center">
+
+![PowerShell](https://img.shields.io/badge/PS%20Module-207bcd)
+![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?style=flat-square&logo=powershell&logoColor=white&labelColor=2C3E50)
+![GitHub Stars](https://img.shields.io/github/stars/arnaudcharles/pswee?style=flat-square&logo=github&color=FFD700&labelColor=2C3E50)
+![GitHub License](https://img.shields.io/github/license/arnaudcharles/pswee)
+![GitHub Release](https://img.shields.io/github/v/release/arnaudcharles/pswee)
+
+</div>
+<br>
+<br>
+
 ## How it started
 
 Since I was using core server, as soon as you need to manipulate file, logs or create file without GUI it was honestly a nightmare for me. Not user friendly at all because you need to remind yourself the path, sometime several path and on daily use it's just a waste of time. As Microsoft is not providing bult-in tool for this and because I'm working in a high secure area, we cannot afford to install cosmetic or non approved software. This is where the creation of this module started, because custom and selfmade PowerShell module are already running why not creating mine that can benefit my daily work and help the community ?
@@ -12,9 +24,9 @@ I already made [**PSBITE**](https://github.com/arnaudcharles/PSBITE) that is for
 
 ## Prerequisites
 
-- Require PowerShell 7 (for better looking)
+- Require PowerShell 7 (using Windows Terminal for better looking)
 
-  Working also with PowerShell 5 (GUI will look like more basic)
+  Working also with PowerShell 5.
 
 - Better to have [**PSBITE**](https://github.com/arnaudcharles/PSBITE) for editing.
 
@@ -31,7 +43,7 @@ Import-Module -Name PSWEE
 
 Here is a list of example that are typical use cases for the module.
 
-### Launches PSWEE on server01 with current credentials.
+### Launches PSWEE on server01 with current credentials
 
 ```powershell
 Start-PSWEE -ComputerName "server01"
@@ -39,11 +51,11 @@ Start-PSWEE -ComputerName "server01"
 
 ### What it look like
 
-#### PowerShell 7
-<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="PowerShell 7" /> </p>
+#### Windows Terminal
+<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="WT" /> </p>
 
-#### PowerShell 5
-<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh5.png" alt="PowerShell 5" /> </p>
+#### PowerShell 7
+<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh5.png" alt="PowerShell 7" /> </p>
 
 ### Find more examples
 
@@ -67,3 +79,7 @@ Please see the issues tab on this project and submit a new issue that matches yo
 
 If you do code, we'd love to have your contributions. Please read the [Contribution guidelines](CONTRIBUTING.md) for more information.
 You can either help by picking up an existing issue or submit a new one if you have an idea for a new feature or improvement.
+
+### Ref
+
+Thanks to [Marius](https://github.com/MariusStorhaug) for his job on [PsModule Framework](https://psmodule.io/ ) used to built this.

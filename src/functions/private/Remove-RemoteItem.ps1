@@ -1,4 +1,22 @@
 function Remove-RemoteItem {
+    <#
+    .SYNOPSIS
+        Deletes a file or folder on the remote host.
+    .DESCRIPTION
+        Presents an interactive console UI to confirm deletion of a file or folder
+        on the remote host via an existing WinRM session.
+    .PARAMETER FilePath
+        The full path of the remote file or folder to delete.
+    .PARAMETER ItemName
+        The name of the item to delete (for display purposes).
+    .PARAMETER IsFolder
+        Indicates whether the item to delete is a folder.
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
+    [CmdletBinding()]
     param([string]$FilePath, [string]$ItemName, [bool]$IsFolder)
 
     Clear-Host

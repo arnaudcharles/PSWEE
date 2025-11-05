@@ -35,9 +35,14 @@
 .NOTES
     Requires WinRM enabled on the remote computer.
     Uses HTTPS (port 5986) by default for security.
+
+    Author: Arnaud Charles
+    GitHub: https://github.com/arnaudcharles
+    LinkedIn: https://www.linkedin.com/in/arnaudcharles
 #>
 
 function Start-PSWEE {
+    [CmdletBinding()]
     [Alias("wee", "weee", "weeee", "weeeee")]
     param(
         [Parameter(Mandatory = $true)]

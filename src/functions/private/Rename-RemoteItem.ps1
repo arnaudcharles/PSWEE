@@ -1,4 +1,20 @@
 function Rename-RemoteItem {
+    <#
+    .SYNOPSIS
+        Renames a file or folder on the remote host.
+    .DESCRIPTION
+        Presents an interactive console UI to rename a file or folder
+        on the remote host via an existing WinRM session.
+    .PARAMETER FilePath
+        The full path of the remote file or folder to rename.
+    .PARAMETER CurrentName
+        The current name of the item to rename (for display purposes).
+    .NOTES
+        Author: Arnaud Charles
+        GitHub: https://github.com/arnaudcharles
+        LinkedIn: https://www.linkedin.com/in/arnaudcharles
+    #>
+    [CmdletBinding()]
     param([string]$FilePath, [string]$CurrentName)
 
     Clear-Host
