@@ -20,6 +20,7 @@ MD029: false # Ordered list item prefix
 MD033: false # Allow inline HTML
 MD034: false # Bare URL used
 MD036: false # Emphasis used instead of a heading
+MD041: false # First line in file should be a top level heading
 
 #################
 # Rules by tags #

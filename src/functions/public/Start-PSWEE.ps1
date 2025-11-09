@@ -43,7 +43,6 @@
 
 function Start-PSWEE {
     [CmdletBinding()]
-    [Alias("wee", "weee", "weeee", "weeeee")]
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -56,12 +55,15 @@ function Start-PSWEE {
     )
 
     # Initialize main script variables
+    $ErrorActionPreference = 'Stop'
     $script:currentPath = "C:\"
     $script:selectedIndex = 0
     $script:items = @()
     $script:isConnected = $false
     $script:session = $null
-    $ErrorActionPreference = 'Stop'
+    $script:moveSource = $null
+    $script:moveSourceName = $null
+    $script:moveMode = $false
     $script:consoleWidth = $Host.UI.RawUI.WindowSize.Width - 2
     $originalTitle = $Host.UI.RawUI.WindowTitle
     $Host.UI.RawUI.WindowTitle = "( ͡° ͜ʖ ͡°)  PSWEE"
@@ -139,6 +141,58 @@ function Start-PSWEE {
                         if ($key.Modifiers -eq 'Alt') {
                             if ($selectedItem -and -not $selectedItem.IsFolder) {
                                 Invoke-PSBite-Editor -FilePath $selectedItem.FullPath
+                                Show-UI
+                            }
+                        }
+                    }
+                    'G' {
+                        if ($key.Modifiers -eq 'Alt') {
+                            Invoke-GoTo
+                            Show-UI
+                        }
+                    }
+                    'M' {
+                        if ($key.Modifiers -eq 'Alt') {
+                            if ($script:moveMode -and $script:moveSource) {
+                                # Execute the move
+                                try {
+                                    Invoke-Command -Session $script:session -ArgumentList $script:moveSource, $script:currentPath -ScriptBlock {
+                                        param($Source, $Destination)
+                                        Move-Item -Path $Source -Destination $Destination -Force
+                                    }
+
+                                    Write-Host "`n✔ Item moved successfully !" -ForegroundColor Green
+                                    Start-Sleep -Seconds 1
+
+                                    # Reset move mode
+                                    $script:moveMode = $false
+                                    $script:moveSource = $null
+                                    $script:moveSourceName = $null
+
+                                    # Refresh items
+                                    $script:items = Get-RemoteItems -Path $script:currentPath
+                                    $script:selectedIndex = 0
+                                    Show-UI
+                                }
+                                catch {
+                                    Write-Host "`n✘ Move failed: $_" -ForegroundColor Red
+                                    Start-Sleep -Seconds 2
+                                    Show-UI
+                                }
+                            }
+                            elseif ($selectedItem) {
+                                # Initialize move mode
+                                Invoke-Move -FilePath $selectedItem.FullPath -ItemName $selectedItem.Name
+                                $script:items = Get-RemoteItems -Path $script:currentPath
+                                Show-UI
+                            }
+                        }
+                    }
+                    'D' {
+                        if ($key.Modifiers -eq 'Alt') {
+                            if ($selectedItem) {
+                                Invoke-Duplicate -FilePath $selectedItem.FullPath -ItemName $selectedItem.Name -IsFolder $selectedItem.IsFolder
+                                $script:items = Get-RemoteItems -Path $script:currentPath
                                 Show-UI
                             }
                         }

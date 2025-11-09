@@ -1,10 +1,7 @@
 # Views for Start-PSWEE
 
-## PowerShell 7
-<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="PowerShell 7" /> </p>
-
-## PowerShell 5
-<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_pwsh5.png" alt="PowerShell 5" /> </p>
+## Main view
+<p align="center"> <img src="../media/Start-PSWEE/MainView.png" alt="Windows Terminal" /> </p>
 
 ## Properties
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_properties0.png" alt="Properties" /> </p>
@@ -16,7 +13,7 @@
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_file1.png" alt="Create new file" /> </p>
 
 ## Create new file or folder (next step)
-<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_file2.png" alt="Create new file" /> </p>
+<p align="center"> <img src="../media/Start-PSWEE//Start-PSWEE_file2.png" alt="Create new file" /> </p>
 
 ## Deletion of file
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_del0.png" alt="Delete file" /> </p>
@@ -29,3 +26,12 @@
 
 ## Edition of file (Open in PSBITE)
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_edit1.png" alt="Edition of file" /> </p>
+
+## Dulicate file or folder
+<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_duplicate0.png" alt="Duplicate folder" /> </p>
+
+## Move menu
+<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_move0.png" alt="Move menu" /> </p>
+
+## Move item (next step)
+<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_move1.png" alt="Moving folder" /> </p>

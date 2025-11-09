@@ -22,7 +22,7 @@ function Invoke-PSBite-Editor {
 
     # Title centered
     $titleText = " 〲 PSBITE INTEGRATION 〲 "
-    $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
     $spaces = " " * $padding
     Write-Host -NoNewline $spaces
     Write-Host $titleText -ForegroundColor Cyan

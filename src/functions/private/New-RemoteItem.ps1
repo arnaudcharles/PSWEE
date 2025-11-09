@@ -22,7 +22,7 @@ function New-RemoteItem {
 
     # Title centered
     $titleText = " CREATE NEW ITEM "
-    $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
     $spaces = " " * $padding
     Write-Host -NoNewline $spaces
     Write-Host $titleText -ForegroundColor Yellow
@@ -53,7 +53,7 @@ function New-RemoteItem {
             Clear-Host
             Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
             $titleText = " CREATE NEW ITEM "
-            $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
             $spaces = " " * $padding
             Write-Host -NoNewline $spaces
             Write-Host $titleText -ForegroundColor Yellow
@@ -65,7 +65,7 @@ function New-RemoteItem {
             Clear-Host
             Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
             $titleText = " CREATE NEW ITEM "
-            $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
             $spaces = " " * $padding
             Write-Host -NoNewline $spaces
             Write-Host $titleText -ForegroundColor Yellow
@@ -85,7 +85,7 @@ function New-RemoteItem {
 
     # Title centered
     $titleText = " CREATE NEW ITEM "
-    $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
     $spaces = " " * $padding
     Write-Host -NoNewline $spaces
     Write-Host $titleText -ForegroundColor Yellow
