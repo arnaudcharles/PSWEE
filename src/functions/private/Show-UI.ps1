@@ -15,12 +15,21 @@ function Show-UI {
 
     Clear-Host
 
+    # Check minimum console width
+    $minWidth = 80
+    if ($script:consoleWidth -lt $minWidth) {
+        Write-Host "Console window is too narrow. Minimum width required: $minWidth characters." -ForegroundColor Red
+        Write-Host "Current width: $script:consoleWidth characters." -ForegroundColor Yellow
+        Write-Host "Please resize your console window and try again." -ForegroundColor Yellow
+        return
+    }
+
     # Line fat 0
     Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
 
     # Define the full title to define centering
     $titlePart = "📁 PSWEE (WinRM Emulated Explorer)  🔗 $ComputerName"
-    $padding = [Math]::Floor(($script:consoleWidth - $titlePart.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titlePart.Length) / 2))
     $spaces = " " * $padding
 
     # Title with specific colors
@@ -52,7 +61,7 @@ function Show-UI {
         $sizeWidth = 14
 
         # Available width for Name
-        $nameWidth = $typeStartPos - 5  # -5 for " ▶ 📁 "
+        $nameWidth = [Math]::Max(10, $typeStartPos - 5)  # -5 for " ▶ 📁 ", minimum 10 chars
 
         # Header
         $headerName = "Name".PadRight($nameWidth)
@@ -111,8 +120,8 @@ function Show-UI {
 
     # Footer
     # Footer Line 1 - Main Navigation
-    $footerLine1 = "[↑/↓] Navigate  [ENTER] Open  [BACKSPACE] Return  [Q] Quit"
-    $padding1 = [Math]::Floor(($script:consoleWidth - $footerLine1.Length) / 2)
+    $footerLine1 = "[↑/↓] Navigate  [ENTER] Open  [BACKSPACE] Return  [ALT+G] Go To  [Q] Quit"
+    $padding1 = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $footerLine1.Length) / 2))
     $spaces1 = " " * $padding1
 
     Write-Host ""
@@ -124,12 +133,14 @@ function Show-UI {
     Write-Host -NoNewline "] Open  [" -ForegroundColor White
     Write-Host -NoNewline "BACKSPACE" -ForegroundColor Gray
     Write-Host -NoNewline "] Return  [" -ForegroundColor White
-    Write-Host -NoNewline "Q" -ForegroundColor Green
+    Write-Host -NoNewline "ALT+G" -ForegroundColor White
+    Write-Host -NoNewline "] Go To  [" -ForegroundColor White
+    Write-Host -NoNewline "Q" -ForegroundColor Red
     Write-Host "] Quit" -ForegroundColor White
 
     # Footer Line 2 - Item Operations
-    $footerLine2 = "[ALT+N] New  [ALT+R] Rename  [ALT+E] Edit  [DEL] Delete  [ALT+P] Properties"
-    $padding2 = [Math]::Floor(($script:consoleWidth - $footerLine2.Length) / 2)
+    $footerLine2 = "[ALT+N] New  [ALT+R] Rename  [ALT+E] Edit  [ALT+D] Duplicate  [ALT+M] Move  [DEL] Delete  [ALT+P] Properties"
+    $padding2 = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $footerLine2.Length) / 2))
     $spaces2 = " " * $padding2
 
     Write-Host ""
@@ -141,6 +152,10 @@ function Show-UI {
     Write-Host -NoNewline "] Rename  [" -ForegroundColor White
     Write-Host -NoNewline "ALT+E" -ForegroundColor Cyan
     Write-Host -NoNewline "] Edit  [" -ForegroundColor White
+    Write-Host -NoNewline "ALT+D" -ForegroundColor DarkCyan
+    Write-Host -NoNewline "] Duplicate  [" -ForegroundColor White
+    Write-Host -NoNewline "ALT+M" -ForegroundColor Green
+    Write-Host -NoNewline "] Move  [" -ForegroundColor White
     Write-Host -NoNewline "DEL" -ForegroundColor Red
     Write-Host -NoNewline "] Delete  [" -ForegroundColor White
     Write-Host -NoNewline "ALT+P" -ForegroundColor Blue

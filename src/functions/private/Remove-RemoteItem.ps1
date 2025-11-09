@@ -26,7 +26,7 @@ function Remove-RemoteItem {
 
     # Title centered
     $titleText = " DELETE ITEM "
-    $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
     $spaces = " " * $padding
     Write-Host -NoNewline $spaces
     Write-Host $titleText -ForegroundColor Red

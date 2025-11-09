@@ -24,7 +24,7 @@ function Rename-RemoteItem {
 
     # Title centered
     $titleText = " RENAME ITEM "
-    $padding = [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2)
+    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
     $spaces = " " * $padding
     Write-Host -NoNewline $spaces
     Write-Host $titleText -ForegroundColor DarkYellow
