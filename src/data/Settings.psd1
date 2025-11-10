@@ -1,3 +1,0 @@
-﻿@{
-    RandomSetting = 'RandomSettingValue'
-}
