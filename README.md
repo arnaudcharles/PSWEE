@@ -28,7 +28,7 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 **>_ Windows Terminal**
 <p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_wt.png" alt="WT" /> </p>
 
-**>_ PowerShell 7**
+**>_ Console Host**
 <p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="PowerShell 7" /> </p>
 
 
