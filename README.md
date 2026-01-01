@@ -101,6 +101,10 @@ Since I was using core server, as soon as I needed to manipulate file, logs or c
 
 I already made [**PSBITE**](https://github.com/arnaudcharles/PSBITE) that is for me solving one issue and I wanted to make something link to it to benefit from both projects.
 
+## 🔗 Functions dependencies
+
+See [Function Dependencies](DEPENDENCIES.md) to understand link between each functions.
+
 ## 🔧 Contributing
 
 Coder or not, you can contribute to the project! We welcome all contributions.
