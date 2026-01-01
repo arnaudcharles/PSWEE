@@ -2,7 +2,7 @@
 
 # PSWEE
 
-**PSWEE** stand for **P**owerShell **W**inRM **E**mulated **E**xplorer.
+**PSWEE** stand for **P**ower**S**hell **W**inRM **E**mulated **E**xplorer.
 </div>
 
 It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, move or rename files. Additionnaly the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
