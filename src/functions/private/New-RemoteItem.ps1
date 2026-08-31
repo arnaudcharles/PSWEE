@@ -15,20 +15,7 @@ function New-RemoteItem {
     [CmdletBinding()]
     param([string]$Path)
 
-    Clear-Host
-
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " CREATE NEW ITEM "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor Yellow
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+    Write-PSWEEHeader -Title "CREATE NEW ITEM" -Color Yellow
 
     # MAIN VIEW -> Select between Folder and File
     Write-Host "`n  Choose what to create:`n"
@@ -50,26 +37,12 @@ function New-RemoteItem {
 
         if ($key.Key -eq 'UpArrow') {
             $selectedChoice = 0
-            Clear-Host
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-            $titleText = " CREATE NEW ITEM "
-            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-            $spaces = " " * $padding
-            Write-Host -NoNewline $spaces
-            Write-Host $titleText -ForegroundColor Yellow
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+            Write-PSWEEHeader -Title "CREATE NEW ITEM" -Color Yellow
             Write-Host "`n  Choose what to create:`n"
         }
         elseif ($key.Key -eq 'DownArrow') {
             $selectedChoice = 1
-            Clear-Host
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-            $titleText = " CREATE NEW ITEM "
-            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-            $spaces = " " * $padding
-            Write-Host -NoNewline $spaces
-            Write-Host $titleText -ForegroundColor Yellow
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+            Write-PSWEEHeader -Title "CREATE NEW ITEM" -Color Yellow
             Write-Host "`n  Choose what to create:`n"
         }
         elseif ($key.Key -eq 'Enter') {
@@ -78,20 +51,7 @@ function New-RemoteItem {
     }
 
     # SECOND VIEW -> Get the name and create the item
-    Clear-Host
-
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " CREATE NEW ITEM "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor Yellow
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+    Write-PSWEEHeader -Title "CREATE NEW ITEM" -Color Yellow
 
     if ($selectedChoice -eq 0) {
         # Folder creation
@@ -104,9 +64,18 @@ function New-RemoteItem {
             return
         }
 
-        try {
-            $folderPath = Join-Path $Path $folderName
+        $folderPath = Join-Path $Path $folderName
 
+        # A name containing a path separator or ".." would land outside the current folder - confirm explicitly
+        if ($folderName -match '[\\/]' -or $folderName -eq '..') {
+            if (-not (Confirm-PSWEEAction -Message "Folder name resolves outside the current folder, create at:" -ItemName $folderPath)) {
+                Write-Host "`n✘ Folder creation cancelled" -ForegroundColor Yellow
+                Start-Sleep -Seconds 1
+                return
+            }
+        }
+
+        try {
             Invoke-Command -Session $script:session -ArgumentList $folderPath -ScriptBlock {
                 param($FolderPath)
                 $null = New-Item -Path $FolderPath -ItemType Directory -Force
@@ -131,9 +100,18 @@ function New-RemoteItem {
             return
         }
 
-        try {
-            $filePath = Join-Path $Path $fileName
+        $filePath = Join-Path $Path $fileName
 
+        # A name containing a path separator or ".." would land outside the current folder - confirm explicitly
+        if ($fileName -match '[\\/]' -or $fileName -eq '..') {
+            if (-not (Confirm-PSWEEAction -Message "File name resolves outside the current folder, create at:" -ItemName $filePath)) {
+                Write-Host "`n✘ File creation cancelled" -ForegroundColor Yellow
+                Start-Sleep -Seconds 1
+                return
+            }
+        }
+
+        try {
             Invoke-Command -Session $script:session -ArgumentList $filePath -ScriptBlock {
                 param($FilePath)
                 $null = New-Item -Path $FilePath -ItemType File -Force

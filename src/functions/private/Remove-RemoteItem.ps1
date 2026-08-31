@@ -19,40 +19,10 @@ function Remove-RemoteItem {
     [CmdletBinding()]
     param([string]$FilePath, [string]$ItemName, [bool]$IsFolder)
 
-    Clear-Host
+    Write-PSWEEHeader -Title "DELETE ITEM" -Color Red
 
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " DELETE ITEM "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor Red
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Asking for confirmation
-    Write-Host "`n  Are you sure you want to delete: " -NoNewline -ForegroundColor Yellow
-    Write-Host $ItemName -ForegroundColor Red
-
-    # Warning if it's a folder and the contents will be deleted
-    if ($IsFolder) {
-        Write-Host " ➜ This is a FOLDER - all contents will be deleted !" -ForegroundColor Red
-    }
-
-    # Confirmation prompt
-    Write-Host "`n  " -NoNewline -ForegroundColor Yellow
-    Write-Host -NoNewline "[" -ForegroundColor White
-    Write-Host -NoNewline "Yes" -ForegroundColor Green
-    Write-Host -NoNewline "] or [" -ForegroundColor White
-    Write-Host -NoNewline "No" -ForegroundColor Red
-    Write-Host "] ? " -ForegroundColor White
-    $confirm = Read-Host
-
-    if ($confirm -ne 'Y' -and $confirm -ne 'y' -and $confirm -ne 'Yes' -and $confirm -ne 'yes') {
+    $warning = if ($IsFolder) { "This is a FOLDER - all contents will be deleted !" } else { $null }
+    if (-not (Confirm-PSWEEAction -Message "Are you sure you want to delete:" -ItemName $ItemName -Warning $warning)) {
         Write-Host "`n✘ Deletion cancelled" -ForegroundColor Yellow
         Start-Sleep -Seconds 1
         return

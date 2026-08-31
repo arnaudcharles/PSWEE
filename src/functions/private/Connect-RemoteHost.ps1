@@ -36,7 +36,7 @@ function Connect-RemoteHost {
         }
 
         if ($SkipCertificateCheck) {
-            $sessionParams['SessionOption'] = New-PSSessionOption -SkipCACheck -SkipCNCheck
+            $sessionParams['SessionOption'] = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
         }
 
         $script:session = New-PSSession @sessionParams

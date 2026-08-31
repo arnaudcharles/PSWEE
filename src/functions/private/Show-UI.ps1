@@ -37,14 +37,39 @@ function Show-UI {
     Write-Host -NoNewline "📁 " -ForegroundColor DarkYellow
     Write-Host -NoNewline "PSWEE (WinRM Emulated Explorer)" -ForegroundColor Blue
     Write-Host -NoNewline "  🔗 " -ForegroundColor Cyan
-    Write-Host "$ComputerName" -ForegroundColor Cyan
+    Write-Host "$ComputerName" -ForegroundColor White
 
     # Line fat 1
     Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
 
+    # How many item rows actually fit in the current window (header + footer take 14 fixed lines)
+    $fixedOverheadLines = 14
+    $windowHeight = $Host.UI.RawUI.WindowSize.Height
+    $maxVisible = [Math]::Max(3, $windowHeight - $fixedOverheadLines)
+    $needsScrollbar = $script:items.Count -gt $maxVisible
+
+    if ($needsScrollbar) {
+        # Keep the current selection inside the visible window (classic scrolling viewport)
+        if ($script:selectedIndex -lt $script:scrollOffset) {
+            $script:scrollOffset = $script:selectedIndex
+        }
+        elseif ($script:selectedIndex -ge $script:scrollOffset + $maxVisible) {
+            $script:scrollOffset = $script:selectedIndex - $maxVisible + 1
+        }
+        $maxScrollOffset = $script:items.Count - $maxVisible
+        $script:scrollOffset = [Math]::Min([Math]::Max(0, $script:scrollOffset), $maxScrollOffset)
+    } else {
+        $script:scrollOffset = 0
+    }
+
     # Current path
     Write-Host ("┄" * $script:consoleWidth) -ForegroundColor White
-    Write-Host "  📍 Location:  $($script:currentPath)" -ForegroundColor White
+    $locationLine = "  📍 Location:  $($script:currentPath)"
+    if ($needsScrollbar) {
+        $rangeText = "($($script:scrollOffset + 1)-$($script:scrollOffset + $maxVisible) of $($script:items.Count))"
+        $locationLine = $locationLine.PadRight($script:consoleWidth - $rangeText.Length - 2) + $rangeText
+    }
+    Write-Host $locationLine -ForegroundColor White
     Write-Host ("┄" * $script:consoleWidth) -ForegroundColor White
 
     if ($script:items.Count -eq 0) {
@@ -78,7 +103,16 @@ function Show-UI {
         # Line Slim 0
         Write-Host ("─" * $script:consoleWidth) -ForegroundColor White
 
-        for ($i = 0; $i -lt $script:items.Count; $i++) {
+        # Scrollbar thumb geometry (relative to the visible window, not the full list)
+        if ($needsScrollbar) {
+            $thumbSize = [Math]::Min($maxVisible, [Math]::Max(1, [Math]::Round($maxVisible * $maxVisible / $script:items.Count)))
+            $trackSpan = [Math]::Max(1, $maxVisible - $thumbSize)
+            $thumbStart = if ($maxScrollOffset -eq 0) { 0 } else { [Math]::Round(($script:scrollOffset / $maxScrollOffset) * $trackSpan) }
+        }
+
+        $visibleCount = [Math]::Min($maxVisible, $script:items.Count - $script:scrollOffset)
+        for ($r = 0; $r -lt $visibleCount; $r++) {
+            $i = $script:scrollOffset + $r
             $item = $script:items[$i]
             # Determine prefix
             $prefix = if ($i -eq $script:selectedIndex) { "▶" } else { " " }
@@ -111,6 +145,12 @@ function Show-UI {
             # Add Modified at the correct position
             $line = $line.PadRight($modStartPos) + $item.Modified
 
+            # Side scrollbar showing where the visible window sits within the full list
+            if ($needsScrollbar) {
+                $scrollChar = if ($r -ge $thumbStart -and $r -lt ($thumbStart + $thumbSize)) { '█' } else { '│' }
+                $line = $line.PadRight($script:consoleWidth - 2) + " $scrollChar"
+            }
+
             Write-Host $line -ForegroundColor $color -BackgroundColor $bgColor
         }
     }
@@ -127,13 +167,13 @@ function Show-UI {
     Write-Host ""
     Write-Host -NoNewline $spaces1
     Write-Host -NoNewline "[" -ForegroundColor White
-    Write-Host -NoNewline "↑/↓" -ForegroundColor Gray
+    Write-Host -NoNewline "↑/↓" -ForegroundColor Cyan
     Write-Host -NoNewline "] Navigate  [" -ForegroundColor White
-    Write-Host -NoNewline "ENTER" -ForegroundColor Gray
+    Write-Host -NoNewline "ENTER" -ForegroundColor Cyan
     Write-Host -NoNewline "] Open  [" -ForegroundColor White
-    Write-Host -NoNewline "BACKSPACE" -ForegroundColor Gray
+    Write-Host -NoNewline "BACKSPACE" -ForegroundColor Cyan
     Write-Host -NoNewline "] Return  [" -ForegroundColor White
-    Write-Host -NoNewline "ALT+G" -ForegroundColor White
+    Write-Host -NoNewline "ALT+G" -ForegroundColor Cyan
     Write-Host -NoNewline "] Go To  [" -ForegroundColor White
     Write-Host -NoNewline "Q" -ForegroundColor Red
     Write-Host "] Quit" -ForegroundColor White
@@ -150,7 +190,7 @@ function Show-UI {
     Write-Host -NoNewline "] New  [" -ForegroundColor White
     Write-Host -NoNewline "ALT+R" -ForegroundColor DarkYellow
     Write-Host -NoNewline "] Rename  [" -ForegroundColor White
-    Write-Host -NoNewline "ALT+E" -ForegroundColor Cyan
+    Write-Host -NoNewline "ALT+E" -ForegroundColor Magenta
     Write-Host -NoNewline "] Edit  [" -ForegroundColor White
     Write-Host -NoNewline "ALT+D" -ForegroundColor DarkCyan
     Write-Host -NoNewline "] Duplicate  [" -ForegroundColor White

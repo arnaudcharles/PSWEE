@@ -23,6 +23,16 @@ function Get-RemoteItems {
                 return @()
             }
 
+            $binaryExtensions = @(
+                '.exe', '.dll', '.msi', '.sys', '.bin', '.dat', '.iso', '.cab',
+                '.zip', '.7z', '.rar', '.gz', '.tar',
+                '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.ico',
+                '.pdf', '.mp3', '.mp4', '.avi', '.mkv', '.wav',
+                '.db', '.sqlite', '.pfx', '.cer', '.p12',
+                '.class', '.jar', '.pyc', '.obj', '.lib', '.node',
+                '.woff', '.woff2', '.ttf', '.eot'
+            )
+
             Get-ChildItem -Path $RemotePath -Force -ErrorAction SilentlyContinue |
             Select-Object -Property @{
                 Name       = 'Name'
@@ -30,7 +40,11 @@ function Get-RemoteItems {
             },
             @{
                 Name       = 'Type'
-                Expression = { if ($_.PSIsContainer) { 'Folder' } else { 'File' } }
+                Expression = {
+                    if ($_.PSIsContainer) { 'Folder' }
+                    elseif ($binaryExtensions -contains $_.Extension.ToLower()) { 'Binary' }
+                    else { 'File' }
+                }
             },
             @{
                 Name       = 'Size'

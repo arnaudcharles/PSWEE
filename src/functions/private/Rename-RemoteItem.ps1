@@ -17,20 +17,7 @@ function Rename-RemoteItem {
     [CmdletBinding()]
     param([string]$FilePath, [string]$CurrentName)
 
-    Clear-Host
-
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " RENAME ITEM "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor DarkYellow
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+    Write-PSWEEHeader -Title "RENAME ITEM" -Color DarkYellow
 
     # Current name and prompt for new name
     Write-Host "`n  Current name: " -NoNewline -ForegroundColor Yellow
@@ -46,10 +33,19 @@ function Rename-RemoteItem {
         return
     }
 
-    try {
-        $parentPath = Split-Path -Parent $FilePath
-        $newPath = Join-Path $parentPath $newName
+    $parentPath = Split-Path -Parent $FilePath
+    $newPath = Join-Path $parentPath $newName
 
+    # A name containing a path separator or ".." would actually move the item elsewhere - confirm explicitly
+    if ($newName -match '[\\/]' -or $newName -eq '..') {
+        if (-not (Confirm-PSWEEAction -Message "New name resolves outside the current folder, rename to:" -ItemName $newPath)) {
+            Write-Host "`n✘ Rename cancelled" -ForegroundColor Yellow
+            Start-Sleep -Seconds 1
+            return
+        }
+    }
+
+    try {
         Invoke-Command -Session $script:session -ArgumentList $FilePath, $newPath -ScriptBlock {
             param($OldPath, $NewPath)
             Rename-Item -Path $OldPath -NewName (Split-Path -Leaf $NewPath) -Force
