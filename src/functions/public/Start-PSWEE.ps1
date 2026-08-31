@@ -3,7 +3,8 @@
     Opens an interactive file explorer for a remote computer via WinRM HTTPS.
 
 .DESCRIPTION
-    Start-PSWEE (WinRM Emulated Explorer) is an interactive file explorer that connects to a remote computer via WinRM HTTPS (port 5986) and allows browsing, creating, renaming and deleting files and folders.
+    Start-PSWEE (WinRM Emulated Explorer) is an interactive file explorer that connects to a remote computer
+    via WinRM HTTPS (port 5986) and allows browsing, creating, renaming and deleting files and folders.
 
 .PARAMETER ComputerName
     The name of the remote computer to explore. Mandatory parameter.
@@ -58,6 +59,7 @@ function Start-PSWEE {
     $ErrorActionPreference = 'Stop'
     $script:currentPath = "C:\"
     $script:selectedIndex = 0
+    $script:scrollOffset = 0
     $script:items = @()
     $script:isConnected = $false
     $script:session = $null
@@ -98,7 +100,19 @@ function Start-PSWEE {
                         Show-UI
                     }
                     'Enter' {
-                        Open-Item
+                        if ($selectedItem -and -not $selectedItem.IsFolder) {
+                            $viewParams = @{
+                                FilePath             = $selectedItem.FullPath
+                                ItemName             = $selectedItem.Name
+                                IsBinary             = ($selectedItem.Type -eq 'Binary')
+                                ComputerName         = $ComputerName
+                                Credential           = $Credential
+                                SkipCertificateCheck = $SkipCertificateCheck
+                            }
+                            Show-FileViewer @viewParams
+                        } else {
+                            Open-Item
+                        }
                         Show-UI
                     }
                     'Backspace' {
@@ -140,7 +154,14 @@ function Start-PSWEE {
                     'E' {
                         if ($key.Modifiers -eq 'Alt') {
                             if ($selectedItem -and -not $selectedItem.IsFolder) {
-                                Invoke-PSBite-Editor -FilePath $selectedItem.FullPath
+                                $editParams = @{
+                                    FilePath             = $selectedItem.FullPath
+                                    ComputerName         = $ComputerName
+                                    Session              = $script:session
+                                    Credential           = $Credential
+                                    SkipCertificateCheck = $SkipCertificateCheck
+                                }
+                                Invoke-PSBite-Editor @editParams
                                 Show-UI
                             }
                         }

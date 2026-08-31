@@ -7,43 +7,34 @@ function Invoke-PSBite-Editor {
         to open the specified remote file in the PSBite editor.
     .PARAMETER FilePath
         The full path of the remote file to open in the PSBite editor.
+    .PARAMETER ComputerName
+        The remote computer name PSBite should connect to for synchronization.
+    .PARAMETER Session
+        An already-established PSSession to hand over to PSBite so it doesn't reconnect.
+    .PARAMETER Credential
+        Credential to use if PSBite has to open its own session (no -Session provided).
+    .PARAMETER SkipCertificateCheck
+        Skip SSL/TLS certificate verification if PSBite has to open its own session.
+    .PARAMETER InitialLine
+        1-based line number to place the cursor on when PSBite opens (default: 1).
     .NOTES
         Author: Arnaud Charles
         GitHub: https://github.com/arnaudcharles
         LinkedIn: https://www.linkedin.com/in/arnaudcharles
     #>
     [CmdletBinding()]
-    param([string]$FilePath)
+    param(
+        [string]$FilePath,
+        [string]$ComputerName,
+        [System.Management.Automation.Runspaces.PSSession]$Session,
+        [PSCredential]$Credential,
+        [switch]$SkipCertificateCheck,
+        [int]$InitialLine = 1
+    )
 
-    Clear-Host
+    Write-PSWEEHeader -Title "PSBITE INTEGRATION" -Color Cyan
 
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " 〲 PSBITE INTEGRATION 〲 "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor Cyan
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # File description
-    Write-Host "`n  File: " -NoNewline -ForegroundColor Yellow
-    Write-Host $FilePath -ForegroundColor DarkCyan
-
-    # Confirmation prompt
-    Write-Host "`n  " -NoNewline -ForegroundColor Yellow
-    Write-Host -NoNewline "Confirm opening? [" -ForegroundColor White
-    Write-Host -NoNewline "Yes" -ForegroundColor Green
-    Write-Host -NoNewline "] or [" -ForegroundColor White
-    Write-Host -NoNewline "No" -ForegroundColor Red
-    Write-Host "] ? " -ForegroundColor White
-    $confirm = Read-Host
-
-    if ($confirm -ne 'Y' -and $confirm -ne 'y' -and $confirm -ne 'Yes' -and $confirm -ne 'yes') {
+    if (-not (Confirm-PSWEEAction -Message "Confirm opening file:" -ItemName $FilePath)) {
         Write-Host "`n✘ Execution cancelled" -ForegroundColor Yellow
         Start-Sleep -Seconds 1
         return
@@ -61,7 +52,15 @@ function Invoke-PSBite-Editor {
         }
 
         # Call Start-PSBite with parameters
-        Start-PSBite -FilePath $FilePath -ComputerName $ComputerName
+        $psbiteParams = @{
+            FilePath             = $FilePath
+            ComputerName         = $ComputerName
+            Session              = $Session
+            Credential           = $Credential
+            SkipCertificateCheck = $SkipCertificateCheck
+            InitialLine          = $InitialLine
+        }
+        Start-PSBite @psbiteParams
 
         # End of processing
         Write-Host "`n▶  Execution completed !" -ForegroundColor Green

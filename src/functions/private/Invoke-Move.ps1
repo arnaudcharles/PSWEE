@@ -20,20 +20,7 @@ function Invoke-Move {
     [CmdletBinding()]
     param([string]$FilePath, [string]$ItemName)
 
-    Clear-Host
-
-    # Line fat 0
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-
-    # Title centered
-    $titleText = " MOVE ITEM "
-    $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-    $spaces = " " * $padding
-    Write-Host -NoNewline $spaces
-    Write-Host $titleText -ForegroundColor Magenta
-
-    # Line fat 1
-    Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+    Write-PSWEEHeader -Title "MOVE ITEM" -Color Magenta
 
     # Item description
     Write-Host "`n  Item to move: " -NoNewline -ForegroundColor Yellow
@@ -57,28 +44,14 @@ function Invoke-Move {
 
         if ($key.Key -eq 'UpArrow') {
             $selectedChoice = 0
-            Clear-Host
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-            $titleText = " MOVE ITEM "
-            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-            $spaces = " " * $padding
-            Write-Host -NoNewline $spaces
-            Write-Host $titleText -ForegroundColor Magenta
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+            Write-PSWEEHeader -Title "MOVE ITEM" -Color Magenta
             Write-Host "`n  Item to move: " -NoNewline -ForegroundColor Yellow
             Write-Host $ItemName -ForegroundColor White
             Write-Host "`n  Choose destination method:`n"
         }
         elseif ($key.Key -eq 'DownArrow') {
             $selectedChoice = 1
-            Clear-Host
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-            $titleText = " MOVE ITEM "
-            $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-            $spaces = " " * $padding
-            Write-Host -NoNewline $spaces
-            Write-Host $titleText -ForegroundColor Magenta
-            Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+            Write-PSWEEHeader -Title "MOVE ITEM" -Color Magenta
             Write-Host "`n  Item to move: " -NoNewline -ForegroundColor Yellow
             Write-Host $ItemName -ForegroundColor White
             Write-Host "`n  Choose destination method:`n"
@@ -90,14 +63,7 @@ function Invoke-Move {
 
     if ($selectedChoice -eq 0) {
         # 1 Option: Enter path directly
-        Clear-Host
-        Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
-        $titleText = " MOVE ITEM "
-        $padding = [Math]::Max(0, [Math]::Floor(($script:consoleWidth - $titleText.Length) / 2))
-        $spaces = " " * $padding
-        Write-Host -NoNewline $spaces
-        Write-Host $titleText -ForegroundColor Magenta
-        Write-Host ("═" * $script:consoleWidth) -ForegroundColor White
+        Write-PSWEEHeader -Title "MOVE ITEM" -Color Magenta
 
         Write-Host "`n  Item to move: " -NoNewline -ForegroundColor Yellow
         Write-Host $ItemName -ForegroundColor White

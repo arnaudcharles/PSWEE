@@ -11,8 +11,6 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 
 <div align="center">
 
-[![starline](https://starlines.qoo.monster/assets/arnaudcharles/pswee)](https://github.com/qoomon/starline)
-
 ![PowerShell](https://img.shields.io/badge/PS%20Module-207bcd)
 ![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?style=flat-square&logo=powershell&logoColor=white&labelColor=2C3E50)
 ![GitHub Stars](https://img.shields.io/github/stars/arnaudcharles/pswee?style=flat-square&logo=github&color=FFD700&labelColor=2C3E50)
@@ -26,7 +24,8 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 ## 👀 What it look like
 
 **>_ Windows Terminal**
-<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_wt.png" alt="WT" /> </p>
+<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_wt.png" alt="Main" /> </p>
+<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_FileView.png" alt="WT File open" /> </p>
 
 **>_ Console Host**
 <p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="PowerShell 7" /> </p>
@@ -48,7 +47,7 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 
 - Require PowerShell **7** (using Windows Terminal for better looking)
 
-- Better to have [**PSBITE**](https://github.com/arnaudcharles/PSBITE) for editing.
+- MUST HAVE [**PSBITE**](https://github.com/arnaudcharles/PSBITE) for editing.
 
 ## 📦 Installation
 
