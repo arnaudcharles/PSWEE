@@ -1,7 +1,10 @@
 # Views for Start-PSWEE
 
 ## Main view
-<p align="center"> <img src="../media/Start-PSWEE/MainView.png" alt="Windows Terminal" /> </p>
+<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_wt.png" alt="Windows Terminal" /> </p>
+
+## Open file
+<p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_FileView.png" alt="Open File" /> </p>
 
 ## Properties
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_properties0.png" alt="Properties" /> </p>
