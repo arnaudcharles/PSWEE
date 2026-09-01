@@ -16,3 +16,7 @@ outputs/*
 bin/
 obj/
 libs/
+
+# Other
+.DS_Store
+Thumbs.db

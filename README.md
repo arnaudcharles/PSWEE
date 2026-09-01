@@ -5,7 +5,7 @@
 **PSWEE** stand for **P**ower**S**hell **W**inRM **E**mulated **E**xplorer.
 </div>
 
-It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, move or rename files. Additionnaly the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
+It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, open, move or rename files. Additionnaly the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
 
 <p align="center"> <img src="./media/logo/PSWEE.png" alt="Logo" /> </p>
 
@@ -45,9 +45,9 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 
 ## 📄 Prerequisites
 
-- Require PowerShell **7** (using Windows Terminal for better looking)
+- Require PowerShell **7** (Modern Terminal like Windows Terminal for better looking)
 
-- MUST HAVE [**PSBITE**](https://github.com/arnaudcharles/PSBITE) for editing.
+- MUST HAVE [**PSBITE**](https://github.com/arnaudcharles/PSBITE) for editing. (Optional if you don't want to edit on the fly)
 
 ## 📦 Installation
 
@@ -65,6 +65,13 @@ Launches PSWEE on server01 with current credentials
 ```powershell
 Start-PSWEE -ComputerName "server01.mydomain.io"
 ```
+
+With specified credentials
+
+```powershell
+Start-PSWEE -ComputerName "server01.bastion.io" -Credential (Get-Credential)
+```
+
 
 💡 Feel free to create an alias in your profile `wee`, `weee`, `weeee`, `weeee` !
 

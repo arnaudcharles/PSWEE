@@ -33,6 +33,9 @@
 
     Launches PSWEE ignoring certificate verification.
 
+.LINK
+    https://psmodule.io/PSWEE/Functions/Start-PSWEE/
+
 .NOTES
     Requires WinRM enabled on the remote computer.
     Uses HTTPS (port 5986) by default for security.

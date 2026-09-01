@@ -308,6 +308,7 @@ function Show-FileViewer {
                         }
                     } catch {
                         # Keep showing the previously loaded content if the reload fails
+                        Write-Verbose "Failed to reload $FilePath after editing: $_"
                     }
                 }
             }
