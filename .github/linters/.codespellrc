@@ -1,0 +1,5 @@
+[codespell]
+# These are intentional: "ower"/"wee" come from README acronym styling and the
+# PSWEE alias suggestion; "environemnt"/"pacakge" are typo-detection patterns
+# inside .textlintrc itself, not actual prose typos.
+ignore-words-list = ower,wee,environemnt,pacakge
