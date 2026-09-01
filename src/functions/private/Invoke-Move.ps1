@@ -6,7 +6,7 @@ function Invoke-Move {
         Prompts the user to choose a destination method (entering a path or navigating)
         and attempts to move the specified remote item to the chosen destination.
 
-        The first option allow you to put a path direclty, the second open back the explorer to navigate where you
+        The first option allow you to put a path directly, the second open back the explorer to navigate where you
         want to paste the item and confirm by using again ALT+M.
     .PARAMETER FilePath
         The full path of the remote item to move.

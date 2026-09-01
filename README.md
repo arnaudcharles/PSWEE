@@ -5,7 +5,7 @@
 **PSWEE** stand for **P**ower**S**hell **W**inRM **E**mulated **E**xplorer.
 </div>
 
-It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, open, move or rename files. Additionnaly the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
+It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, open, move or rename files. Additionally the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
 
 <p align="center"> <img src="./media/logo/PSWEE.png" alt="Logo" /> </p>
 
@@ -103,7 +103,7 @@ We highly depend on **ALT** to interact.
 
 ## 📰 How it started
 
-Since I was using core server, as soon as I needed to manipulate file, logs or create file without GUI it was honestly a nightmare. Not user friendly at all because you need to remind yourself the path, sometime several path and on daily use it's just a waste of time. As Microsoft is not providing bult-in tool for this and because I'm working in a high secure area, we cannot afford to install cosmetic or non approved software. This is where the creation of this module started, because custom and selfmade PowerShell module are already running why not creating mine that can benefit my daily work and help the community ?
+Since I was using core server, as soon as I needed to manipulate file, logs or create file without GUI it was honestly a nightmare. Not user friendly at all because you need to remind yourself the path, sometime several path and on daily use it's just a waste of time. As Microsoft is not providing built-in tool for this and because I'm working in a high secure area, we cannot afford to install cosmetic or non approved software. This is where the creation of this module started, because custom and selfmade PowerShell module are already running why not creating mine that can benefit my daily work and help the community ?
 
 I already made [**PSBITE**](https://github.com/arnaudcharles/PSBITE) that is for me solving one issue and I wanted to make something link to it to benefit from both projects.
 

@@ -30,7 +30,7 @@
 ## Edition of file (Open in PSBITE)
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_edit1.png" alt="Edition of file" /> </p>
 
-## Dulicate file or folder
+## Duplicate file or folder
 <p align="center"> <img src="../media/Start-PSWEE/Start-PSWEE_duplicate0.png" alt="Duplicate folder" /> </p>
 
 ## Move menu
