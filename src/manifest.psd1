@@ -5,7 +5,6 @@
 
     PrivateData = @{
         PSData = @{
-            # Logo affiche sur la PowerShell Gallery (fichier icon/icon.png du depot).
             IconUri = 'https://raw.githubusercontent.com/arnaudcharles/PSWEE/main/icon/icon.png'
         }
     }
