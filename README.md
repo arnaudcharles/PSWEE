@@ -5,7 +5,7 @@
 **PSWEE** stand for **P**ower**S**hell **W**inRM **E**mulated **E**xplorer.
 </div>
 
-It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, open, move or rename files. Additionally the module is made to work in conjoncture with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
+It's a console file explorer that allow you to navigate using **WinRM**, you can also do basic commands like add new files/folder, delete, open, move or rename files. Additionally the module is made to work in conjunction with [**PSBITE**](https://github.com/arnaudcharles/PSBITE), with this you can easily edit file on the fly.
 
 <p align="center"> <img src="./media/logo/PSWEE.png" alt="Logo" /> </p>
 
@@ -79,7 +79,7 @@ Start-PSWEE -ComputerName "server01.bastion.io" -Credential (Get-Credential)
 
 To find more examples of how to use the module, please refer to the [examples](examples) folder. Some view are available in [Views](./views/Start-PSWEE.md)
 
-Alternatively, you can use the Get-Command -Module 'PSBITE' to find more commands that are available in the module.
+Alternatively, you can use the Get-Command -Module 'PSWEE' to find more commands that are available in the module.
 To find examples of each of the commands you can use Get-Help -Examples 'CommandName'.
 
 ## 📌 How to use it
