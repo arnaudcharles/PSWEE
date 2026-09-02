@@ -28,7 +28,8 @@ permissions:
 
 jobs:
   Process-PSModule:
-    uses: PSModule/Process-PSModule/.github/workflows/workflow.yml@v8
+    # Pinned to the #529 fix commit until v8.0.4 is released, then revert to @v8.
+    uses: PSModule/Process-PSModule/.github/workflows/workflow.yml@68696b6223ecb17c7807ae4eb108a5f4c0419c4a
     secrets:
       PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
       GitHubAppClientId: ${{ secrets.APP_CLIENT_ID }}
