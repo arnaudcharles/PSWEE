@@ -19,7 +19,11 @@ function Connect-RemoteHost {
         LinkedIn: https://www.linkedin.com/in/arnaudcharles
     #>
     [CmdletBinding()]
-    param()
+    param(
+        [string]$ComputerName,
+        [PSCredential]$Credential,
+        [switch]$SkipCertificateCheck
+    )
 
     try {
         Write-Host "`n>> Connecting to $ComputerName..." -ForegroundColor Cyan

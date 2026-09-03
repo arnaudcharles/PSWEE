@@ -74,7 +74,7 @@ function Start-PSWEE {
     $Host.UI.RawUI.WindowTitle = "( ͡° ͜ʖ ͡°)  PSWEE"
 
     # Connection
-    if (-not (Connect-RemoteHost)) {
+    if (-not (Connect-RemoteHost -ComputerName $ComputerName -Credential $Credential -SkipCertificateCheck:$SkipCertificateCheck)) {
         return
     }
 
