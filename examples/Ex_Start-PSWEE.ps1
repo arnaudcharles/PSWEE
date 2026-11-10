@@ -14,3 +14,6 @@ Start-PSWEE -cn "server01" -Credential (Get-Credential)
 
 # Launches PSWEE ignoring certificate verification.
 Start-PSWEE -ComputerName "server01" -SkipCertificateCheck
+
+# Launches PSWEE over plain WinRM HTTP (e.g. port 5985) instead of the default HTTPS.
+Start-PSWEE -ComputerName "server01" -Port 5985 -UseSSL:$false

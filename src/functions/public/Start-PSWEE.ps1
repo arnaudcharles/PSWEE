@@ -14,6 +14,13 @@
     PowerShell credentials to connect to the remote computer.
     If not provided, uses the current user's credentials.
 
+.PARAMETER Port
+    The WinRM port to connect to. Defaults to 5986 (HTTPS).
+
+.PARAMETER UseSSL
+    Whether to use SSL/TLS (WinRM HTTPS) for the connection. Defaults to $true.
+    Set to $false to connect over plain WinRM HTTP (e.g. -UseSSL:$false), typically with -Port 5985.
+
 .PARAMETER SkipCertificateCheck
     Ignores SSL/TLS certificate verification.
     Useful for self-signed certificates.
@@ -33,12 +40,17 @@
 
     Launches PSWEE ignoring certificate verification.
 
+.EXAMPLE
+    Start-PSWEE -ComputerName "server01" -Port 5985 -UseSSL:$false
+
+    Launches PSWEE over plain WinRM HTTP instead of the default HTTPS.
+
 .LINK
     https://psmodule.io/PSWEE/Functions/Start-PSWEE/
 
 .NOTES
     Requires WinRM enabled on the remote computer.
-    Uses HTTPS (port 5986) by default for security.
+    Uses HTTPS (port 5986) by default for security. Both the port and SSL usage are configurable.
 
     Author: Arnaud Charles
     GitHub: https://github.com/arnaudcharles
@@ -54,6 +66,10 @@ function Start-PSWEE {
         [string]$ComputerName,
 
         [PSCredential]$Credential,
+
+        [int]$Port = 5986,
+
+        [bool]$UseSSL = $true,
 
         [switch]$SkipCertificateCheck
     )
@@ -74,7 +90,7 @@ function Start-PSWEE {
     $Host.UI.RawUI.WindowTitle = "( ͡° ͜ʖ ͡°)  PSWEE"
 
     # Connection
-    if (-not (Connect-RemoteHost -ComputerName $ComputerName -Credential $Credential -SkipCertificateCheck:$SkipCertificateCheck)) {
+    if (-not (Connect-RemoteHost -ComputerName $ComputerName -Credential $Credential -Port $Port -UseSSL $UseSSL -SkipCertificateCheck:$SkipCertificateCheck)) {
         return
     }
 
