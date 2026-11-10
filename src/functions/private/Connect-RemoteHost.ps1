@@ -9,6 +9,10 @@ function Connect-RemoteHost {
         The name or IP address of the remote computer to connect to.
     .PARAMETER Credential
         PowerShell credentials to use for the connection.
+    .PARAMETER Port
+        The WinRM port to connect to. Defaults to 5986 (HTTPS).
+    .PARAMETER UseSSL
+        Whether to use SSL/TLS (WinRM HTTPS) for the connection. Defaults to $true.
     .PARAMETER SkipCertificateCheck
         If specified, SSL/TLS certificate verification will be skipped.
     .NOTES
@@ -22,6 +26,8 @@ function Connect-RemoteHost {
     param(
         [string]$ComputerName,
         [PSCredential]$Credential,
+        [int]$Port = 5986,
+        [bool]$UseSSL = $true,
         [switch]$SkipCertificateCheck
     )
 
@@ -30,8 +36,8 @@ function Connect-RemoteHost {
 
         $sessionParams = @{
             ComputerName = $ComputerName
-            Port         = 5986
-            UseSSL       = $true
+            Port         = $Port
+            UseSSL       = $UseSSL
             ErrorAction  = 'Stop'
         }
 

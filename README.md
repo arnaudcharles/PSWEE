@@ -72,6 +72,11 @@ With specified credentials
 Start-PSWEE -ComputerName "server01.bastion.io" -Credential (Get-Credential)
 ```
 
+Over plain WinRM HTTP instead of the default HTTPS (port 5986)
+
+```powershell
+Start-PSWEE -ComputerName "server01.mydomain.io" -Port 5985 -UseSSL:$false
+```
 
 💡 Feel free to create an alias in your profile `wee`, `weee`, `weeee`, `weeee` !
 
