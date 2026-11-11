@@ -23,12 +23,12 @@ It's a console file explorer that allow you to navigate using **WinRM**, you can
 
 ## 👀 What it look like
 
+<p align="center"> <img src="./media/Start-PSWEE-Examples/Start-PSWEE-showcase.gif" alt="PSWEE Showcase" /> </p>
+
 **>_ Windows Terminal**
 <p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_wt.png" alt="Main" /> </p>
 <p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_FileView.png" alt="WT File open" /> </p>
 
-**>_ Console Host**
-<p align="center"> <img src="./media/Start-PSWEE/Start-PSWEE_pwsh7.png" alt="PowerShell 7" /> </p>
 
 
 ## 💪 Advantages
@@ -66,11 +66,15 @@ Launches PSWEE on server01 with current credentials
 Start-PSWEE -ComputerName "server01.mydomain.io"
 ```
 
+<p align="center"> <img src="./media/Start-PSWEE-Examples/Start-PSWEE-ex1.gif" alt="Example 1 - Current credentials" /> </p>
+
 With specified credentials
 
 ```powershell
 Start-PSWEE -ComputerName "server01.bastion.io" -Credential (Get-Credential)
 ```
+
+<p align="center"> <img src="./media/Start-PSWEE-Examples/Start-PSWEE-ex2.gif" alt="Example 2 - Specified credentials" /> </p>
 
 Over plain WinRM HTTP instead of the default HTTPS (port 5986)
 
@@ -78,7 +82,7 @@ Over plain WinRM HTTP instead of the default HTTPS (port 5986)
 Start-PSWEE -ComputerName "server01.mydomain.io" -Port 5985 -UseSSL:$false
 ```
 
-💡 Feel free to create an alias in your profile `wee`, `weee`, `weeee`, `weeee` !
+💡 Feel free to create an alias in your profile `wee`, `weee`, `weeee`, `weeeee` !
 
 ### Find more examples
 

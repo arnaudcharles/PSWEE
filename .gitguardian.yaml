@@ -1,0 +1,5 @@
+version: 2
+secret:
+  ignored_paths:
+    - "examples/Ex_Start-PSWEE-showcase.ps1"
+    - "tapes/Start-PSWEE-showcase.tape"
